@@ -31,14 +31,15 @@ RUN apt-get update && \
 	rm -rf /var/lib/apt/lists/* && \
 	apt-get clean
 
-# RUN ln -s /usr/bin/python3 /usr/bin/python
-# RUN ln -s /usr/bin/pip3 /usr/bin/pip
+RUN rm /usr/bin/python
+RUN ln -s /usr/bin/python3 /usr/bin/python
+RUN ln -s /usr/bin/pip3 /usr/bin/pip
 
 RUN mkdir /root/.pip
 RUN echo "[global]" >/root/.pip/pip.conf && \
 	echo "index-url = https://pypi.tuna.tsinghua.edu.cn/simple" >>/root/.pip/pip.conf
 
-RUN echo 'root:bjut2019' |chpasswd
+RUN echo 'root:toor' |chpasswd
 
 RUN sed -ri 's/#PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config && \
 	sed -ri 's/UsePAM yes/#UsePAM yes/g' /etc/ssh/sshd_config
